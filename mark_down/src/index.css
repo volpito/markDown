@@ -12,3 +12,26 @@ p {
   color: white;
 
 }
+
+button {
+  float: right;
+  background-color: #a00f0f;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-right: 55px;
+  font-size: 16px;
+  font-family: Arial;
+  transition: background-color 200ms ease-out;
+}
+
+button:hover {
+  background-color: rgb(105, 27, 27);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+textarea {
+width: 95%
+}

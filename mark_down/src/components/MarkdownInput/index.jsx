@@ -27,7 +27,7 @@ function MarkdownInput() {
   }
 
   function handleRead(){
-    var promp = prompt('Quelle note souhaitez-vous montrer ?')
+    var promp = prompt('Quelle note souhaitez-vous montrer ? (tapez le titre ici)')
     setSearch(localStorage.getItem(promp));
   }
 
@@ -48,11 +48,12 @@ function MarkdownInput() {
   var thisNote = JSON.parse(thisTitle);
   var final = thisNote.map(a => "- Titre : " + a[0] + ", Contenu : " + a[1] + " ")
   console.log(thisNote);  
+  console.log(note);  
 
   return (
       <div>
       <button onClick={handleSave}>Save</button> <br/>        
-      <h2 style={{color: 'red'}}>Ci dessous : une préview de votre note :</h2>
+      <h2 style={{color: 'red'}}>Ci-dessous, une préview de votre note :</h2>
       <h4 style={{color: 'red'}}><NoteDisplay markdownValue={title} /></h4>
       <><NoteDisplay markdownValue={value} /></>
       <textarea id="titleArea" rows="2" cols="100" value={title} onChange={onTitleChange}> 
@@ -62,8 +63,9 @@ function MarkdownInput() {
       <button onClick={handleDelete}>Delete all notes</button>
       <button onClick={handleRead}>Read</button>        
       <button onClick={handleEdit}>Edit</button> <br/>        
-      <p>{'Voici le contenu de la note désignée : ' + search}</p>
-      <p>Veuillez trouve ci-dessous l'ensemble de vos articles, pour recherche :</p>
+      <p>{search}</p>
+      <br/><br/>
+      <p>Veuillez trouve ci-dessous l'ensemble de vos articles :</p>
       <p>{final}</p>
       </div>
   )
