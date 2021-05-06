@@ -32,27 +32,31 @@ function MarkdownInput() {
   }
 
   function handleEdit(){
-    var promp = prompt('Quelle note souhaitez-vous modifier ?')
+    var promp = prompt('Quelle note souhaitez-vous modifier ? (tapez le titre ici)')
     var val = prompt('Que voulez vous y écrire ?')
     localStorage.setItem(promp, val);
   }
 
-  var thisTitle = JSON.stringify(localStorage.getItem(title));
+  var keys = Object.keys(localStorage).map(a => a)
+  var notes = Object.values(localStorage).map(a => a)
+  
+  var result = keys.map(function(e, i) {
+    return [e, notes[i]];
+  });
+
+  var thisTitle = JSON.stringify(result);
   var thisNote = JSON.parse(thisTitle);
-  //console.log(thisNote);
-  var keys = Object.keys(localStorage).map(a => a + ", ")
-  var notes = Object.values(localStorage).map(a => a + ", ")
-  console.log(keys);  
+  var final = thisNote.map(a => "- Titre : " + a[0] + ", Contenu : " + a[1] + " ")
+  console.log(thisNote);  
 
   return (
       <div>
       <button onClick={handleSave}>Save</button> <br/>        
-      <br /><br />
-      <>Votre titre : <NoteDisplay markdownValue={title} /></>
-      <>Votre texte : <NoteDisplay markdownValue={value} /></>
+      <h2 style={{color: 'red'}}>Ci dessous : une préview de votre note :</h2>
+      <h4 style={{color: 'red'}}><NoteDisplay markdownValue={title} /></h4>
+      <><NoteDisplay markdownValue={value} /></>
       <textarea id="titleArea" rows="2" cols="100" value={title} onChange={onTitleChange}> 
       </textarea>
-
       <textarea id="textArea" rows="30" cols="100" value={value} onChange={onChange}> 
       </textarea>
       <button onClick={handleDelete}>Delete all notes</button>
@@ -60,8 +64,7 @@ function MarkdownInput() {
       <button onClick={handleEdit}>Edit</button> <br/>        
       <p>{'Voici le contenu de la note désignée : ' + search}</p>
       <p>Veuillez trouve ci-dessous l'ensemble de vos articles, pour recherche :</p>
-      <p>{keys}</p>
-      <p>{notes}</p>
+      <p>{final}</p>
       </div>
   )
 };

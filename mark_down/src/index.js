@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MarkdownInput from './components/MarkdownInput';
+import './index.css';
 
 
 const App = () => (
