@@ -1,7 +1,12 @@
 import React from 'react';
+import NoteDisplay from '../NoteDisplay';
 import { useState } from 'react';
 
-function MarkdownInput({}) {
+function handleSave ()  {
+  localStorage.setItem('blocNote');
+}
+
+function MarkdownInput() {
   const [value, setValue] = useState('');
 
   const onChange = (event) => {
@@ -10,12 +15,14 @@ function MarkdownInput({}) {
 
   const handleClick = () => {
     console.log(value);
+    handleSave();
   }
 
   return (
       <div>
-      <button onClick={handleClick}>Enregistrer votre texte</button>
-      <p>Votre texte : {value}</p>
+      <button onClick={handleClick}>Save</button>
+      <br /><br />
+      <>Votre texte : <NoteDisplay markdownValue={value} /></>
       <textarea id="textArea" rows="30" cols="100" value={value} onChange={onChange}> 
       </textarea>
       </div>
